@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function SortChallenge({ sortType }) {
-  const [numbers, setNumbers] = useState([5, 2, 9, 1]);
+function SortChallenge({ sortType, onComplete, resetSort }) {
+  const generateRandomArray = () =>
+    Array.from({ length: 4 }, () => Math.floor(Math.random() * 9) + 1);
+
+  const [numbers, setNumbers] = useState(generateRandomArray());
   const [sorted, setSorted] = useState(false);
 
   const bubbleSort = (arr) => {
@@ -31,20 +34,34 @@ function SortChallenge({ sortType }) {
   };
 
   const handleSort = () => {
-    const result = sortType === 'bubble' ? bubbleSort(numbers) : selectionSort(numbers);
+    const result =
+      sortType === "bubble" ? bubbleSort(numbers) : selectionSort(numbers);
     setNumbers(result);
     setSorted(true);
+    setSorted(true);
+    onComplete(); // let App know sorting is done
   };
 
   return (
-    <div style={{ marginTop: '30px' }}>
+    <div style={{ marginTop: "30px" }}>
       <h2>Sorting Challenge ({sortType})</h2>
-      <div style={{ fontSize: '20px', marginBottom: '10px' }}>
-        {numbers.join(', ')}
+      <div style={{ fontSize: "20px", marginBottom: "10px" }}>
+        {numbers.join(", ")}
       </div>
       <button onClick={handleSort} disabled={sorted}>
         Sort Now
       </button>
+      <button
+        onClick={() => {
+          setNumbers(generateRandomArray());
+          setSorted(false);
+            resetSort();
+        }}
+        style={{ marginLeft: "10px" }}
+      >
+        Reset
+      </button>
+
       {sorted && <p>✅ Sorted!</p>}
     </div>
   );

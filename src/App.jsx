@@ -9,6 +9,7 @@ function App() {
       .map(() => Array(9).fill(""))
   );
   const [sortType, setSortType] = useState("bubble"); // default is bubble
+  const [sortCompleted, setSortCompleted] = useState(false);
 
   const handleChange = (row, col, value) => {
     // Only allow digits 1–9
@@ -40,13 +41,18 @@ function App() {
                 type="text"
                 maxLength="1"
                 value={cellValue}
+                disabled={row === 0 && col === 0 && !sortCompleted}
                 onChange={(e) => handleChange(row, col, e.target.value)}
               />
             ))}
           </div>
         ))}
       </div>
-      <SortChallenge sortType={sortType} />
+      <SortChallenge
+        sortType={sortType}
+        onComplete={() => setSortCompleted(true)}
+          resetSort={() => setSortCompleted(false)}
+      />
     </div>
   );
 }

@@ -11,15 +11,40 @@ function App() {
   const [sortType, setSortType] = useState("bubble"); // default is bubble
   const [sortCompleted, setSortCompleted] = useState(false);
 
+  const isValidMove = (row, col, value) => {
+  // Check row
+  for (let c = 0; c < 9; c++) {
+    if (c !== col && board[row][c] === value) {
+      return false;
+    }
+  }
+
+  // Check column
+  for (let r = 0; r < 9; r++) {
+    if (r !== row && board[r][col] === value) {
+      return false;
+    }
+  }
+
+  return true; // Valid move
+};
+
   const handleChange = (row, col, value) => {
     // Only allow digits 1–9
-    if (!/^[1-9]?$/.test(value)) return;
+if (!/^[1-9]?$/.test(value)) return;
 
-    const updatedBoard = [...board];
-    updatedBoard[row][col] = value;
-    setBoard(updatedBoard);
+if (value !== '' && !isValidMove(row, col, value)) {
+  alert(`❌ ${value} already exists in this row or column.`);
+  return;
+}
+
+const updatedBoard = board.map((r) => [...r]); // deep copy
+updatedBoard[row][col] = value;
+setBoard(updatedBoard);
+
   };
 
+  
   return (
     <div className="container">
       <h1>Sudoku Game</h1>

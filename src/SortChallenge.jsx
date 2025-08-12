@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 function SortChallenge({ sortType, onComplete, resetSort }) {
   const generateRandomArray = () =>
@@ -33,13 +34,14 @@ function SortChallenge({ sortType, onComplete, resetSort }) {
     const result = sortType === "bubble" ? bubbleSort(numbers) : selectionSort(numbers);
     setNumbers(result);
     setSorted(true);
-    onComplete?.(); // tell App we’re done
+    onComplete?.(); // tell App the challenge is completed
+    toast.success("Well")
   };
 
   const handleReset = () => {
     setNumbers(generateRandomArray());
     setSorted(false);
-    resetSort?.(); // re-lock in App if used
+    resetSort?.(); // tell App to re-lock
   };
 
   return (

@@ -27,16 +27,62 @@ body { font-family: system-ui, Arial, sans-serif; }
   outline: none;
 }
 
+.cell.top { border-top: 2px solid #961414a8; }
+.cell.left { border-left: 2px solid #7513d1ff; }
+
+/* every 3rd vertical border thicker */
+.row .cell:nth-child(3), .row .cell:nth-child(6) { border-right: 2px solid #222; }
+/* every 3rd horizontal border thicker (handled via .top on row%3===0) */j
+.row:nth-child(3) .cell, .row:nth-child(6) .cell { border-bottom: 2px solid #222; }
+
+.sortBox {
+  margin-top: 24px;A* { box-sizing: border-box; }
+body { font-family: system-ui, Arial, sans-serif; }
+
+.container {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.toolbar { margin: 10px auto 12px; }
+
+.hint { margin: 6px 0 14px; color: #444; }
+
+.grid {
+  display: inline-block;
+  border: 2px solid #222;
+  padding: 2px;
+}
+
+.row { display: flex; }
+
+.cell {
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid #bbb;
+  outline: none;
+  background: #fff;
+}
+
+.cell:disabled {
+  background: #8d5353ff; /* show locked (givens or pre-sort) */
+}
+
 .cell.top { border-top: 2px solid #222; }
 .cell.left { border-left: 2px solid #222; }
 
 /* every 3rd vertical border thicker */
 .row .cell:nth-child(3), .row .cell:nth-child(6) { border-right: 2px solid #222; }
-/* every 3rd horizontal border thicker (handled via .top on row%3===0) */
+/* every 3rd horizontal border thicker */
 .row:nth-child(3) .cell, .row:nth-child(6) .cell { border-bottom: 2px solid #222; }
 
-.sortBox {
-  margin-top: 24px;
+.sortBox { margin-top: 24px; }
+.numbers { font-size: 18px; margin-bottom: 10px; }
+.ml { margin-left: 10px; }
+.ok { margin-top: 8px; }
+
 }
 
 .numbers {
